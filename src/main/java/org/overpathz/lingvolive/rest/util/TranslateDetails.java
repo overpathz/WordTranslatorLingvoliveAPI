@@ -1,4 +1,4 @@
-package org.overpathz.mono.rest.util;
+package org.overpathz.lingvolive.rest.util;
 
 public class TranslateDetails {
     private String text;

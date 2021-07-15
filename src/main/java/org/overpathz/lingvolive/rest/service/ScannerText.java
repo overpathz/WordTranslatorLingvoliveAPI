@@ -1,4 +1,4 @@
-package org.overpathz.mono.rest.service;
+package org.overpathz.lingvolive.rest.service;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package org.overpathz.mono.rest.entity;
+package org.overpathz.lingvolive.rest.entity;
 
 public class Translation {
     private String Heading;

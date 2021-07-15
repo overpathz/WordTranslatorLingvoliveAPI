@@ -1,4 +1,4 @@
-package org.overpathz.mono.rest;
+package org.overpathz.lingvolive.rest;
 
 import static org.junit.Assert.assertTrue;
 

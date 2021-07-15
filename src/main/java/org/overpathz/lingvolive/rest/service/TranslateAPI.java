@@ -1,12 +1,12 @@
-package org.overpathz.mono.rest.service;
+package org.overpathz.lingvolive.rest.service;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
-import org.overpathz.mono.rest.entity.TranslateResponse;
-import org.overpathz.mono.rest.util.TranslateDetails;
+import org.overpathz.lingvolive.rest.entity.TranslateResponse;
+import org.overpathz.lingvolive.rest.util.TranslateDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
