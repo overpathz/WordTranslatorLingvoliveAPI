@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import org.overpathz.lingvolive.rest.entity.TranslateResponse;
-import org.overpathz.lingvolive.rest.util.TranslateDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -20,7 +19,6 @@ import java.util.Scanner;
 
 @Component("translate")
 public class TranslateAPI {
-
     private String TOKEN;
 
     String TRANSLATE_SERVICE_URL = "https://developers.lingvolive.com/";
@@ -34,24 +32,22 @@ public class TranslateAPI {
     }
 
 
-    public String translate(TranslateDetails translateDetails) {
+
+    public String translate() {
 
         int srcLang = 1049;
         int dstLang = 1033;
 
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Введите текс для перевода: ");
+        System.out.print("Введите слово: ");
         String text = scanner.next();
 
         String MAIN_URL = getParametrizedUrlForTranslationAPI(text, srcLang, dstLang, false);
-
         HttpEntity<String> entity = getEntity("Authorization", TOKEN);
-
         ResponseEntity<String> responseEntity = null;
 
         try {
-            restTemplate.exchange(MAIN_URL, HttpMethod.GET, entity,
+            responseEntity = restTemplate.exchange(MAIN_URL, HttpMethod.GET, entity,
                     new ParameterizedTypeReference<>() {
                     });
         } catch (HttpClientErrorException exception) {
@@ -78,12 +74,12 @@ public class TranslateAPI {
         System.out.println(resultTranslatedWord);
 
         if (resultTranslatedWord.equals("") && resultTranslatedWord == null) {
-            return "I cant translate that";
+            System.out.println("I cant translate that");
+            return "";
         } else {
             return resultTranslatedWord;
         }
     }
-
 
     private String getParametrizedUrlForTranslationAPI(String text, int srcLang, int dstLang, boolean isCaseSensitive) {
         String API_URL = "api/v1/Minicard?text=" + text + "&srcLang=" + srcLang
