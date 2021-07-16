@@ -15,7 +15,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.Scanner;
 
 @Component("translate")
 public class TranslateAPI {
@@ -31,16 +30,12 @@ public class TranslateAPI {
         this.TOKEN = getAuthorizationToken();
     }
 
-
-
-    public String translate() {
+    public String translate(IReader iReader) {
 
         int srcLang = 1049;
         int dstLang = 1033;
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите слово: ");
-        String text = scanner.next();
+        String text = iReader.getWord();
 
         String MAIN_URL = getParametrizedUrlForTranslationAPI(text, srcLang, dstLang, false);
         HttpEntity<String> entity = getEntity("Authorization", TOKEN);
@@ -51,8 +46,7 @@ public class TranslateAPI {
                     new ParameterizedTypeReference<>() {
                     });
         } catch (HttpClientErrorException exception) {
-            System.out.println(exception.getMessage());
-            return "No translations found for text";
+            return "No translations found for text {"+text+"}";
         }
 
         String jsonString = responseEntity.getBody();
@@ -70,15 +64,12 @@ public class TranslateAPI {
         }
 
         String resultTranslatedWord = translateResponse.getTranslation().getTranslation();
+        Buffer.getInstance().setValue(resultTranslatedWord);
+        return resultTranslatedWord;
+    }
 
-        System.out.println(resultTranslatedWord);
-
-        if (resultTranslatedWord.equals("") && resultTranslatedWord == null) {
-            System.out.println("I cant translate that");
-            return "";
-        } else {
-            return resultTranslatedWord;
-        }
+    public void display(IDisplay iDisplay) {
+        iDisplay.display();
     }
 
     private String getParametrizedUrlForTranslationAPI(String text, int srcLang, int dstLang, boolean isCaseSensitive) {
