@@ -79,7 +79,7 @@ public class TranslateAPI {
     }
 
     private String getAuthorizationToken() {
-        String API_KEY = "Basic ZWIxYWE4ZGMtMzRlMy00ZDllLTk3MTgtNzBmYzg1NzkzMjdjOjc2OGNkNzcwZDhjYTQyNDk5ZGYyYWIzYzY3ZDRhNGUy";
+        String API_KEY = "KEY";
         String URL = TRANSLATE_SERVICE_URL + "api/v1.1/authenticate";
 
         HttpEntity<String> entity = getEntity("Authorization", API_KEY);
